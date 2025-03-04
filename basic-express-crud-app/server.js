@@ -1,12 +1,17 @@
 const express = require('express');
+const app = express();
+const config = require('./config');
+
+const port = config.PORT
+
 const { userRouter } = require('./routes');
 const configureRouter = require('./routes');
 const { errorHandler, requestLogger } = require('./middlewares');
-const app = express();
-const port = 1000;
 
+const connectDB = require('./db');
 
-
+//connect database
+connectDB();
 
 // Apply middleware globally
 app.use(requestLogger)

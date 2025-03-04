@@ -1,6 +1,5 @@
 const express = require('express');
-const { userService } = require('../services');
-const { updateUser } = require('../services/userService');
+const { userController } = require('../controller');
 const userRouter = express.Router();
 /* 1️⃣ What is a POST Request?
   GET requests fetch data from the server.
@@ -9,30 +8,15 @@ const userRouter = express.Router();
   
 
 // POST route to create a user
-userRouter.post('/', (req,res)=>{
-  const payload = req.body;
-  const newUser = userService.createUsers(payload);
-res.status(201).json({message:`user added successfully`,user: newUser});
-})
+userRouter.post('/', userController.createUsers)
 // GET route to retrieve users
-userRouter.get('/', (req, res) => {
-    res.json(userService.getUsers());
-  });
+userRouter.get('/', userController.getUsers);
 
+userRouter.get('/:id', userController.getUserById);
 // PUT route update users
-userRouter.put('/:id', (req,res)=>{
-  const {id} = req.params;
-  const payload = req.body;
-  const updatedUser = userService.updateUser(id, payload)
-  res.status(201).json({message:`User updated successfully`,user: updatedUser })
-})
+userRouter.put('/:id', userController.updateUsers)
 
 //DELETE route update users
-userRouter.delete('/:id', (req,res)=>{
-  const {id} = req.params;
-  userService.deleteUser(id)
-  res.status(201).json({ message: "User deleted successfully!" });
-
-})
+userRouter.delete('/:id', userController.deleteUsers)
 
 module.exports = userRouter ;
