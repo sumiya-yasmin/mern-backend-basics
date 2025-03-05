@@ -20,7 +20,7 @@ return newUser;
 }
 
 const updateUser = async(id,payload)=>{
-   return await User.findByIdAndUpdate({_id : id },payload)
+   return await User.findByIdAndUpdate({_id : id },payload, {new: true})
 }
 
 const deleteUser = async (id) =>{
