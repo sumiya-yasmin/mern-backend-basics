@@ -8,7 +8,11 @@ const createUsers = asyncHandler(async (req, res) => {
 });
 
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await userService.getUsers();
+  const { page, offset } = req.query;
+  const users = await userService.getUsers({
+    page: parseInt(page || '0'),
+    offset: parseInt(offset || '10'),
+  });
   res.json(users);
 });
 
@@ -24,7 +28,7 @@ const updateUsers = asyncHandler(async (req, res) => {
   const updatedUser = await userService.updateUser(id, payload);
   res
     .status(201)
-    .json({ message: `User updated successfully`,user: updatedUser });
+    .json({ message: `User updated successfully`, user: updatedUser });
 });
 
 const deleteUsers = asyncHandler(async (req, res) => {

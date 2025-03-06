@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 const config = {
   PORT: process.env.PORT,
   db: {
@@ -7,5 +8,7 @@ const config = {
     Mongo_DBName: process.env.dbName,
   },
 };
+
+
 
 module.exports = config;
