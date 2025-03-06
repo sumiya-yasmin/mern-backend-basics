@@ -1,5 +1,6 @@
 const express = require('express');
 const config = require('./config');
+const cors = require('cors')
 const app = express();
 
 const { default: rateLimit } = require('express-rate-limit');
@@ -19,6 +20,7 @@ const limiter = rateLimit({
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
 	// store: ... , // Redis, Memcached, etc. See below.
 })
+app.use(cors(config.CORS.ORIGIN))
 
 app.use(limiter)
 //connect database

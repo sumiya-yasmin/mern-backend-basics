@@ -7,6 +7,9 @@ const config = {
     MONGO_URI: process.env.MongoUserURI,
     Mongo_DBName: process.env.dbName,
   },
+  CORS: {
+    ORIGIN: process.env.CORS_ORIGIN
+  }
 };
 
 
