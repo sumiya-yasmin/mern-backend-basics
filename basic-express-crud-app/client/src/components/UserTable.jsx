@@ -14,6 +14,11 @@ const columns = [
     width: 150,
   },
   {
+    field: 'image',
+    headerName: 'Image',
+    width: 150,
+  },
+  {
     field: 'email',
     headerName: 'Email',
     type: 'email',
@@ -27,7 +32,7 @@ const columns = [
   {
     field: 'password',
     headerName: 'Password',
-    width: 160,
+    width: 140,
   },
 ];
 

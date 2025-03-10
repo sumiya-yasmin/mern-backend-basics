@@ -1,14 +1,32 @@
+import { Box, Button, Drawer } from '@mui/material'
 import './App.css'
-import  { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UserTable } from './components/UserTable'
-const queryClient = new QueryClient()
+import QueryProvider from './Providers/QueryProvider'
+import { useState } from 'react'
+import { UserForm } from './components'
+
 
 function App() {
+  const [open, setOpen] =useState(false)
   return (
     <>
-    <QueryClientProvider client={queryClient}>
-     <UserTable />
-    </QueryClientProvider>
+     <QueryProvider>
+      <Box>
+      <Box display='flex' width='100%' justifyContent='flex-end'>
+      <Button variant="contained" onClick={()=> setOpen(true)}>Add Users</Button>
+      </Box>
+      <UserTable/>
+      <Drawer
+      anchor={'right'}
+      open={open}
+      onClose={()=>setOpen(false)}
+    >
+      <Box sx={{width: '500px', display: 'flex', justifyContent: 'center'}}>
+      <UserForm />
+      </Box>
+    </Drawer>
+      </Box>
+     </QueryProvider>
     </>
   )
 }
