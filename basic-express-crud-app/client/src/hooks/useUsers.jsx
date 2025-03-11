@@ -6,7 +6,7 @@ function useUsers() {
  
 
     const userQuery = useQuery({ 
-        queryKey: 'users',
+        queryKey: ['users'],
         queryFn: () => fetchUsers()
      })
   return {userQuery}
