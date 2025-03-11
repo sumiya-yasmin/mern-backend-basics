@@ -8,6 +8,13 @@ import { UserForm } from './components'
 
 function App() {
   const [open, setOpen] =useState(false)
+  const productPlaceholder = {
+    name: "",
+    image: "",
+    userId: "",
+    password: ""
+
+  }
   return (
     <>
      <QueryProvider>
@@ -22,7 +29,7 @@ function App() {
       onClose={()=>setOpen(false)}
     >
       <Box sx={{width: '500px', display: 'flex', justifyContent: 'center'}}>
-      <UserForm />
+      <UserForm placeholder={productPlaceholder} />
       </Box>
     </Drawer>
       </Box>
