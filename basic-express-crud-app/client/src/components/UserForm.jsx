@@ -2,15 +2,16 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import useUsers from '../hooks/useUsers';
 export function UserForm({ placeholder }) {
   // const [user, setUser] =useState(placeholder);
   // const handleOnChange = (event) =>{
   //   const {name, value} = event.target;
   //   setUser((prev)=> ({...prev, [name]: value}))
   // }
-  const handleSubmit = (data) => {
-    console.log(data);
-  };
+  // const handleSubmit = (data) => {
+  //   console.log(data);
+  // };
   const userFormSchema = z.object({
     name: z.string().min(3, { message: 'Name must be at least 3 characters' }).max(100),
     image: z.string().optional(),
@@ -22,9 +23,11 @@ export function UserForm({ placeholder }) {
     defaultValues: placeholder,
     resolver: zodResolver(userFormSchema),
   });
+
+  const {createUserMutation} =useUsers()
   return (
     <form
-      onSubmit={form.handleSubmit(handleSubmit, (errors) => console.log(errors))}
+      onSubmit={form.handleSubmit(createUserMutation.mutateAsync, (errors) => console.log(errors))}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <Stack spacing={2} sx={{ width: '100%', padding: '20px' }}>

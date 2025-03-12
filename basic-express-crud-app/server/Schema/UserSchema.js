@@ -12,7 +12,7 @@ const ReviewSchema = z.object({
 const  UserSchema = z.object({
     ...IdSchema.shape,
     ...nameSchema.shape,
-    image: z.string(),
+    image: z.string().optional(),
     email: z.string(),
     userId: z.string(),
     password: z.string(),

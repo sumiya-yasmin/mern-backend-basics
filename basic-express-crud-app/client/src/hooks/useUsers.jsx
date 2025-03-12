@@ -1,19 +1,36 @@
 import http from '../config/http';
-import { useQuery} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
 
 function useUsers() {
- 
+  const QueryClient = useQueryClient()
 
     const userQuery = useQuery({ 
         queryKey: ['users'],
         queryFn: () => fetchUsers()
      })
-  return {userQuery}
+  
+  const createUserMutation = useMutation({
+        mutationFn: createUsers,
+        onSuccess: ()=>{
+          QueryClient.invalidateQueries(['users']);
+        },
+        onError: (error)=>{
+          alert('Failed to create user')
+          console.log(error)
+        }
+  })
+  
+  return {userQuery, createUserMutation}
 }
+
 const fetchUsers = async ()=>{
     const { data } = await http.get('/users');
     return data;
+}
+const createUsers = async (newUser)=>{
+  const {data} = await http.post('/users', newUser)
+  return data;
 }
 export default useUsers
 
