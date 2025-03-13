@@ -5,3 +5,6 @@ const requestLogger = (req,res,next)=>{
     }
 
 module.exports = requestLogger;
+
+
+//we dont need log middleware now since we are using pino
